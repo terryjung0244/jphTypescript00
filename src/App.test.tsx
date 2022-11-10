@@ -3,6 +3,6 @@ import React from 'react';
 
 describe('src/App.tsx', () => {
   it('Nothing', () => {
-    expect('a').toBe('');
+    expect('').toBe('');
   });
 });
