@@ -13,8 +13,6 @@ interface InputType {
 }
 
 const App = () => {
-  const trash = 'abc';
-
   const [input, setInput] = useState<InputType>({
     inputA: '',
     inputB: '',
