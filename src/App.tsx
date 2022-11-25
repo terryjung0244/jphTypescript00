@@ -6,6 +6,7 @@ import { JphUserModel } from 'service/type/model/jphUserModel';
 import Button from './components/reusable/button/Button';
 import Input from './components/reusable/input/Input';
 import { OnChangeParamType } from './components/reusable/input/Input.interface';
+import Footer from './components/page/Footer';
 
 interface InputType {
   inputA: string;
@@ -36,12 +37,33 @@ const App = () => {
     });
   };
 
+  if (loading) {
+    return <div data-testid="app-loading-component">Loading...</div>;
+  }
+
+  if (error) {
+    return <div data-testid="app-error-component">{error.message}</div>;
+  }
+
   return (
-    <div>
-      <Button onClickFunc={getJphDataFunc} buttonText={'Click Me'} />
-      <Button onClickFunc={() => alertHello('hello')} buttonText={'Hello'} width={'500px'} height={'100px'} />
-      <Button onClickFunc={() => alertHello()} buttonText={'Hello'} width={'500px'} height={'100px'} />
+    <div data-testid="app-component">
+      <Button dataTestId="button1" onClickFunc={getJphDataFunc} buttonText={'Click Me'} />
+      <Button
+        dataTestId="button2"
+        onClickFunc={() => alertHello('hello')}
+        buttonText={'Hello'}
+        width={'500px'}
+        height={'100px'}
+      />
+      <Button
+        dataTestId="button3"
+        onClickFunc={() => alertHello()}
+        buttonText={'Hello'}
+        width={'500px'}
+        height={'100px'}
+      />
       <Input
+        dataTestId="input1"
         name={'inputA'}
         value={input['inputA']}
         onChangeFunc={onChangeInput}
@@ -50,6 +72,7 @@ const App = () => {
         height={'50px'}
       />
       <Input
+        dataTestId="input2"
         name={'inputB'}
         value={input['inputB']}
         onChangeFunc={onChangeInput}
@@ -68,13 +91,17 @@ const App = () => {
       >
         Click Me
       </button> */}
-      {loading && <div>Loading...</div>}
-      {error && <div>{error.message}</div>}
-      <div>
+      <div data-testid="jph-result">
         {result.map((jphUser: JphUserModel) => {
-          return <div key={jphUser.id}>{jphUser.name}</div>;
+          return (
+            <div key={jphUser.id} data-testid="jph-result-each">
+              <div data-testid="jph-result-each-name">{jphUser.name}</div>
+              <div data-testid="jph-result-each-email">{jphUser.email}</div>
+            </div>
+          );
         })}
       </div>
+      <Footer greeting={'Hello world'} />
     </div>
   );
 };
