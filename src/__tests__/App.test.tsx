@@ -13,6 +13,7 @@ jest.mock('redux/jph/jphAction', () => ({
 
 const renderComponent = (store: Store) =>
   render(
+    /* 실제 component에서 userSelector 또는 useDispatch 썼을 때는 <Provider>로 감싸야 한다. */
     <Provider store={store}>
       <App />
     </Provider>,
